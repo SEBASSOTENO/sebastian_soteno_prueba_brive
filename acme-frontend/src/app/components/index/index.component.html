@@ -1,0 +1,54 @@
+<div class="container">
+  <h1 class="text-center mt-5">Bienvenido a ACME</h1>
+  <h6 class="text-center"> Consulta existencias de productos</h6>
+</div>
+
+<div class="container mt-5">
+  <h4>Ingresa el nombre de un producto: </h4>
+  <div class="d-flex">
+    <input [(ngModel)]="query.nombre" type="text" class="form-control" name="product" id="product">
+    <button class="btn btn-primary ms-2 col-2" (click)="consultar(query)"> <i class="bi bi-search"></i>
+      Consultar</button>
+  </div>
+</div>
+
+<div class="container mt-3" *ngIf="queryFinalizado">
+
+  <div class="row">
+    <div class="col-sm-4 mb-3" *ngFor="let prod of productos">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-text">{{prod.sucursal}}</h4>
+          <h5 class="card-title">{{prod.nombre}}</h5>
+          <h6 class="card-text">Cantidad: {{prod.cantidad}}</h6>
+          <div class=" d-flex flex-row-reverse">
+            <button class="btn btn-success" (click)="consultare(prod)" data-bs-toggle="modal"
+              data-bs-target="#comprarModal"> <i class="bi bi-cart-plus"></i> Comprar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="modal fade" id="comprarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Ingresa el número que quieres comprar</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label class="form-label fs-6 fw-bold">Escribe el número: </label>
+        <input type="number" name="numero" [(ngModel)]="compra.cantidad" id="numero"
+          class="form-control form-control-sm">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="compras()">Comprar</button>
+      </div>
+    </div>
+  </div>
+</div>

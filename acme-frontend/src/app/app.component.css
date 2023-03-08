@@ -1,0 +1,13 @@
+a {
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+a:hover {
+  color: #888888;
+}
+
+#carretilla {
+  width: 25px;
+  margin-right: 5px;
+}

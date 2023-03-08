@@ -1,0 +1,129 @@
+<div class="container">
+  <h1 class="text-center mt-5">Productos</h1>
+</div>
+
+<div class="container">
+  <div class="d-flex flex-row-reverse mb-3">
+    <button class="btn " (click)="agregarProductoFuncion()"
+      [ngClass]="agregarProducto ? 'btn-warning':'btn-primary'">{{!agregarProducto ?
+      'Agregar nuevo producto':'Cancelar'}} </button>
+
+  </div>
+  <app-agregar-producto *ngIf="agregarProducto"></app-agregar-producto>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="table-dark" scope="col">#</th>
+        <th class="table-dark" scope="col">Nombre</th>
+        <th class="table-dark" scope="col">Código de barras</th>
+        <th class="table-dark" scope="col">Precio unitario</th>
+        <th class="table-dark col-3" scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prod of productos; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ prod.nombre }}</td>
+        <td>{{ prod.codigo }}</td>
+        <td>{{ prod.precio }}</td>
+        <td>
+          <button class="btn btn-success" (click)="modificar(prod.id)" data-bs-target="#exampleUpdate"
+            data-bs-toggle="modal"><i class="bi bi-pencil-square"></i></button>
+          <button class="btn btn-primary ms-2" (click)="agregarCantidad(prod.id)" data-bs-target="#modalSucursal"
+            data-bs-toggle="modal"><i class="bi bi-plus-lg"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div class="modal fade" id="exampleUpdate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Actualiza producto</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <div class="mb-3">
+              <label class="form-label fs-6 fw-bold">Nombre</label>
+              <input type="text" disabled class="form-control form-control-sm" [(ngModel)]="infoProducto.nombre">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="mb-3">
+              <label class="form-label fs-6 fw-bold">Código de barras</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="infoProducto.codigo">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="mb-3">
+              <label class="form-label fs-6 fw-bold">Precio Unitario</label>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="infoProducto.precio">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button class="btn btn-primary" (click)="guardarCambios()">Guardar valores</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="modalSucursal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Administra las cantidades del producto</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex flex-row-reverse mb-3">
+          <button class="btn " (click)="agregarDisponibilidadFuncion()"
+            [ngClass]="agregarDisponibilidad ? 'btn-warning':'btn-primary'">{{!agregarDisponibilidad ?
+            'Agregar disponibilidad':'Cancelar'}} </button>
+
+        </div>
+
+        <app-disponibilidad-producto *ngIf="agregarDisponibilidad"></app-disponibilidad-producto>
+        <table *ngIf="!agregarDisponibilidad" class="table table-striped">
+          <thead>
+            <tr>
+              <th class="table-dark" scope="col">#</th>
+              <th class="table-dark" scope="col">Nombre</th>
+              <th class="table-dark" scope="col">Sucursal</th>
+              <th class="table-dark" scope="col">Cantidad</th>
+              <th class="table-dark col-4" scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cant of cantidades let i = index">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ cant.sucursal }}</td>
+              <td>{{ cant.nombre }}</td>
+              <td>
+                <input type="number" class="form-control form-control-sm" [(ngModel)]="cant.cantidad">
+              </td>
+              <td>
+                <button class="btn btn-success" (click)="modificarExistencias(cant)"><i class="bi bi-pencil-square"></i>
+                  Modificar existencias</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

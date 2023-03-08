@@ -1,0 +1,24 @@
+<div class="container">
+  <h1 class="text-center mt-5">Sucursales</h1>
+</div>
+
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="table-dark" scope="col">#</th>
+        <th class="table-dark" scope="col">Nombre</th>
+        <th class="table-dark col-3" scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let suc of sucursales; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ suc.nombre }}</td>
+        <td>
+          <button class="btn btn-danger ms-2" (click)="baja(suc)">Dar de baja</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
